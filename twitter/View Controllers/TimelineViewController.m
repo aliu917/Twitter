@@ -9,11 +9,14 @@
 #import "TimelineViewController.h"
 #import "APIManager.h"
 #import "TweetCell.h"
+#import "Tweet.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *tweets;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -26,18 +29,28 @@
     self.tableView.delegate = self;
     
     // Get timeline
+    [self fetchTweets];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview: self.refreshControl];
+
+}
+
+- (void)fetchTweets {
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             self.tweets = tweets;
+            [self.tableView reloadData];
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             for (Tweet *dictionary in tweets) {
-                NSLog(@"Trying to print.");
-                //NSString *text = dictionary[@"text"];
-                //NSLog(@"%@", text);
+                NSString *text = dictionary.text;
+                NSLog(@"%@", text);
             }
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -60,16 +73,17 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
+    Tweet *tweet = self.tweets[indexPath.row];
+    cell.username.text = tweet.user.name;
+    cell.tweetMessage.text = tweet.text;
+    cell.atUsername.text = tweet.user.screenName;
+    cell.dateLabel.text = tweet.createdAtString;
+    
+    NSString *profilePictureURL = tweet.user.profileImage;
+    NSURL *pictureURL = [NSURL URLWithString:profilePictureURL];
+    [cell.profileImage setImageWithURL:pictureURL];
     
     return cell;
-    
-    /*NSDictionary *tweet = self.tweets[indexPath.row];
-    cell.username.text = tweet[@"user"][@"name"];
-    cell.tweetMessage.text = tweet[@"text"];
-    
-    NSString *profilePicture = tweet[@"user"][@"profile_image_url_https"];
-    NSURL *pictureURL = [NSURL URLWithString:fullPosterURLString];
-    [cell.profileImage setImageWithURL:pictureURL]*/
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
