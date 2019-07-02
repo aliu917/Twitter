@@ -30,9 +30,10 @@
         if (tweets) {
             self.tweets = tweets;
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-            for (NSDictionary *dictionary in tweets) {
-                NSString *text = dictionary[@"text"];
-                NSLog(@"%@", text);
+            for (Tweet *dictionary in tweets) {
+                NSLog(@"Trying to print.");
+                //NSString *text = dictionary[@"text"];
+                //NSLog(@"%@", text);
             }
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
@@ -59,7 +60,6 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
-    NSMutableArray *tweetDictionaries = [Tweet tweetsWithArray:self.tweets];
     
     return cell;
     

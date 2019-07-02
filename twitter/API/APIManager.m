@@ -74,8 +74,10 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     // Create a GET Request
     [self GET:@"1.1/statuses/home_timeline.json" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
        // Success
+        NSLog(@"Success?");
        NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
-       completion(tweets, nil); } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       completion(tweets, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
        // There was a problem
        completion(nil, error);
    }];
