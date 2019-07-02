@@ -8,8 +8,12 @@
 
 #import "TimelineViewController.h"
 #import "APIManager.h"
+#import "TweetCell.h"
 
-@interface TimelineViewController ()
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *tweets;
 
 @end
 
@@ -18,9 +22,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
+            self.tweets = tweets;
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             for (NSDictionary *dictionary in tweets) {
                 NSString *text = dictionary[@"text"];
@@ -47,5 +55,25 @@
 }
 */
 
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    
+    NSMutableArray *tweetDictionaries = [Tweet tweetsWithArray:self.tweets];
+    
+    return cell;
+    
+    /*NSDictionary *tweet = self.tweets[indexPath.row];
+    cell.username.text = tweet[@"user"][@"name"];
+    cell.tweetMessage.text = tweet[@"text"];
+    
+    NSString *profilePicture = tweet[@"user"][@"profile_image_url_https"];
+    NSURL *pictureURL = [NSURL URLWithString:fullPosterURLString];
+    [cell.profileImage setImageWithURL:pictureURL]*/
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.tweets.count;
+}
 
 @end
