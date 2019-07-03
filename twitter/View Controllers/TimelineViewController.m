@@ -12,6 +12,9 @@
 #import "Tweet.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
+#import "Helper.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -72,7 +75,7 @@
     /*NSString *profilePictureURL = tweet.user.profileImage;
     NSURL *pictureURL = [NSURL URLWithString:profilePictureURL];
     [cell.profileImage setImageWithURL:pictureURL];*/
-    NSURL *imageURL = [self getImage: tweet.user.profileImage];
+    NSURL *imageURL = [Helper makeURLWithString: tweet.user.profileImage];
     [cell.profileImage setImageWithURL:imageURL];
     
     [cell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
@@ -83,11 +86,11 @@
     return cell;
 }
 
--(NSURL *) getImage: (NSString *) pictureStringURL {
+/*-(NSURL *) makeURLWithString: (NSString *) pictureStringURL {
     NSString *profilePictureURL = pictureStringURL;
     NSURL *pictureURL = [NSURL URLWithString:profilePictureURL];
     return pictureURL;
-}
+}*/
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
@@ -96,6 +99,13 @@
 - (void)didTweet:(nonnull Tweet *)tweet {
     [self.tweets addObject: tweet];
     [self.tableView reloadData];
+}
+- (IBAction)logout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
 }
 
  #pragma mark - Navigation

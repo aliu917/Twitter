@@ -8,6 +8,8 @@
 
 #import "TweetCell.h"
 #import "APIManager.h"
+#import "Helper.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation TweetCell
 
@@ -36,14 +38,10 @@
 }
 
 -(void)refreshData {
-    self.username = self.tweet.user.name;
-    self.tweetMessage = self.tweet.text;
-    //self.profileImage = self.tweet.user.
-    //self.profileImage = self.tweet.
-    /*[self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+    [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
      [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
      [self.likeButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
-     [self.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];*/
+     [self.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
 }
 
 @end

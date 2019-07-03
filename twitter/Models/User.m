@@ -14,14 +14,18 @@
     self = [super init];
     if (self) {
         self.name = dictionary[@"name"];
-        NSString *atSymbol = @"@";
-        NSString *profileName = dictionary[@"screen_name"];
-        NSString *screenName = [atSymbol stringByAppendingString: profileName];
-        self.screenName = screenName;
+        self.screenName = [self makeScreenName:dictionary];
         self.profileImage = dictionary[@"profile_image_url_https"];
         //initialize any other properties
     }
     return self;
+}
+
+-(NSString *) makeScreenName: (NSDictionary *) dictionary {
+    NSString *atSymbol = @"@";
+    NSString *profileName = dictionary[@"screen_name"];
+    NSString *screenName = [atSymbol stringByAppendingString: profileName];
+    return screenName;
 }
 
 @end
