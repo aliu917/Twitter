@@ -69,9 +69,11 @@
     cell.atUsername.text = tweet.user.screenName;
     cell.dateLabel.text = tweet.createdAtString;
     
-    NSString *profilePictureURL = tweet.user.profileImage;
+    /*NSString *profilePictureURL = tweet.user.profileImage;
     NSURL *pictureURL = [NSURL URLWithString:profilePictureURL];
-    [cell.profileImage setImageWithURL:pictureURL];
+    [cell.profileImage setImageWithURL:pictureURL];*/
+    NSURL *imageURL = [self getImage: tweet.user.profileImage];
+    [cell.profileImage setImageWithURL:imageURL];
     
     [cell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
     [cell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
@@ -79,6 +81,12 @@
     [cell.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
     
     return cell;
+}
+
+-(NSURL *) getImage: (NSString *) pictureStringURL {
+    NSString *profilePictureURL = pictureStringURL;
+    NSURL *pictureURL = [NSURL URLWithString:profilePictureURL];
+    return pictureURL;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
