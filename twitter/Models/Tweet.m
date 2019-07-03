@@ -11,7 +11,7 @@
 
 @implementation Tweet
 
-# pragma mark - Tweet initiation
+#pragma mark - Tweet initiation
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
@@ -46,7 +46,7 @@
     return tweets;
 }
 
-# pragma mark - Tweet Helper Functions
+#pragma mark - Tweet Helper Functions
 -(NSString *) formatDate: (NSDictionary *) dictionary {
     NSString *createdAtOriginalString = dictionary[@"created_at"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

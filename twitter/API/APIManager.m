@@ -48,7 +48,7 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     return self;
 }
 
-# pragma mark - Retrieve and store data
+#pragma mark - Retrieve and store data
 
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
     // Create a GET Request
@@ -83,6 +83,54 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         completion(nil, error);
     }];
+}
+
+- (void)unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
+    NSString *urlString = @"1.1/favorites/destroy.json";
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
+    //NSString *urlString = @"1.1/statuses/retweet/:id.json";
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    NSString *urlString = [self makeURLString: tweet withParam: parameters];
+
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
+    //NSString *urlString = @"1.1/statuses/unretweet/:id.json";
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    NSString *urlString = [self makeURLString: tweet withParam: parameters];
+    
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+#pragma mark - APIManager Helper Functions
+
+- (NSString *) makeURLString: (Tweet *) tweet withParam: parameters {
+    NSString *urlString = @"1.1/statuses/unretweet/";
+    NSString *tweetID = tweet.idStr;
+    NSString *firstHalf = [urlString stringByAppendingString:tweetID];
+    NSString *jsonEnd = @".json";
+    
+    return [firstHalf stringByAppendingString:jsonEnd];
 }
 
 @end

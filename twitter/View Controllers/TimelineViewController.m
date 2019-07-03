@@ -48,13 +48,18 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
-    Tweet *tweet = self.tweets[indexPath.row];
+    
+    cell.tweet = self.tweets[indexPath.row];
+    
+    [cell setTweet];
+    
+    /*
     cell.username.text = tweet.user.name;
     cell.tweetMessage.text = tweet.text;
     cell.atUsername.text = tweet.user.screenName;
     cell.dateLabel.text = tweet.createdAtString;
     NSURL *imageURL = [Helper makeURLWithString: tweet.user.profileImage];
-    [cell.profileImage setImageWithURL:imageURL];
+    [cell.profileImage setImageWithURL:imageURL];*/
     
     
     //maybe like a refresh button method in the helper later???
