@@ -73,6 +73,11 @@
     NSURL *pictureURL = [NSURL URLWithString:profilePictureURL];
     [cell.profileImage setImageWithURL:pictureURL];
     
+    [cell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+    [cell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
+    [cell.likeButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+    [cell.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
+    
     return cell;
 }
 

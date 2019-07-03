@@ -92,7 +92,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tweet" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHf-dd-ZOi">
-                                                    <rect key="frame" x="93" y="39" width="301" height="92"/>
+                                                    <rect key="frame" x="93" y="39" width="301" height="73"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -111,12 +111,27 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lko-Bx-Rvj">
+                                                    <rect key="frame" x="168" y="110" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="retweet-icon"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WkA-sk-hKq">
+                                                    <rect key="frame" x="247" y="110" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="favor-icon"/>
+                                                    <connections>
+                                                        <action selector="didTapLike:" destination="5ke-P8-6xb" eventType="touchUpInside" id="FDb-X1-6uH"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="atUsername" destination="Ki8-y0-Juz" id="HQj-ea-eLV"/>
                                             <outlet property="dateLabel" destination="Bph-AR-HLh" id="qi5-6p-JX4"/>
+                                            <outlet property="likeButton" destination="WkA-sk-hKq" id="GKA-sQ-uwD"/>
                                             <outlet property="profileImage" destination="5MV-c4-EcX" id="J8w-dZ-ZaV"/>
+                                            <outlet property="retweetButton" destination="lko-Bx-Rvj" id="Lim-qP-Jfr"/>
                                             <outlet property="tweetMessage" destination="fHf-dd-ZOi" id="UuK-Sd-hCU"/>
                                             <outlet property="username" destination="lab-s8-W4C" id="A5d-oi-UpS"/>
                                         </connections>
@@ -221,5 +236,7 @@
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
+        <image name="favor-icon" width="30" height="30"/>
+        <image name="retweet-icon" width="30" height="30"/>
     </resources>
 </document>
