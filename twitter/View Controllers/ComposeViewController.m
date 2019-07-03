@@ -18,15 +18,22 @@
 
 @implementation ComposeViewController
 
+#pragma mark - ComposeViewController Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
+#pragma mark - Action: close new tweet screen
+
 - (IBAction)closeButton:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-- (IBAction)createTweet:(id)sender {
+#pragma mark - Action: create new tweet
+
+/*- (IBAction)createTweet:(id)sender {
     [[APIManager shared] postStatusWithText: self.composedTweet.text completion:^(Tweet *tweet, NSError *error) {
         if (tweet) {
             [self dismissViewControllerAnimated:true completion:nil];
@@ -35,9 +42,21 @@
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
     }];
-}
+}*/
 
 - (IBAction)didTapTweet:(id)sender {
+    [[APIManager shared]postStatusWithText:self.composedTweet.text completion:^(Tweet *tweet, NSError *error) {
+        if(error){
+            NSLog(@"Error composing Tweet: %@", error.localizedDescription);
+        }
+        else{
+            [self.delegate didTweet:tweet];
+            [self dismissViewControllerAnimated:true completion:nil];
+        }
+    }];
+}
+
+/*- (IBAction)didTapTweet:(id)sender {
     [[APIManager shared]postStatusWithText:@"This is my tweet 😀" completion:^(Tweet *tweet, NSError *error) {
         if(error){
             NSLog(@"Error composing Tweet: %@", error.localizedDescription);
@@ -47,7 +66,7 @@
             NSLog(@"Compose Tweet Success!");
         }
     }];
-}
+}*/
 
 
 /*

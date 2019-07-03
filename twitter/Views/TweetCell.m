@@ -13,6 +13,8 @@
 
 @implementation TweetCell
 
+# pragma mark - TweetCell Lifecycle
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -20,9 +22,11 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
+
+#pragma mark - Action: Tapped like button
+
 - (IBAction)didTapLike:(id)sender {
     self.tweet.favorited = YES;
     self.tweet.favoriteCount += 1;
@@ -36,6 +40,8 @@
         }
     }];
 }
+
+# pragma mark - TweetCell Helper Functions
 
 -(void)refreshData {
     [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];

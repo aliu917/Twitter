@@ -10,6 +10,8 @@
 
 @implementation User
 
+# pragma mark - User initiation
+
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
@@ -20,6 +22,8 @@
     }
     return self;
 }
+
+# pragma mark - User Helper Functions
 
 -(NSString *) makeScreenName: (NSDictionary *) dictionary {
     NSString *atSymbol = @"@";

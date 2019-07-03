@@ -189,7 +189,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Tweet" id="NcE-xG-l4q">
                             <connections>
-                                <action selector="createTweet:" destination="cDR-Cs-Nrn" id="VbT-8G-ul8"/>
+                                <action selector="didTapTweet:" destination="cDR-Cs-Nrn" id="umf-Vp-xGm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
