@@ -27,6 +27,9 @@
     self.dateLabel.text = self.tweet.createdAtString;
     NSURL *imageURL = [Helper makeURLWithString: self.tweet.user.profileImage];
     [self.profileImage setImageWithURL:imageURL];
+    self.favoriteCount.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
+    self.retweetCount.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -47,6 +50,7 @@
                 self.tweet.favorited = NO;
                 self.tweet.favoriteCount -= 1;
                 [self.likeButton setSelected:NO];
+                self.favoriteCount.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
             }
         }];
     } else {
@@ -59,6 +63,7 @@
                 self.tweet.favorited = YES;
                 self.tweet.favoriteCount += 1;
                 [self.likeButton setSelected:YES];
+                self.favoriteCount.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
             }
         }];
     }
@@ -75,6 +80,7 @@
                 self.tweet.retweeted = NO;
                 self.tweet.retweetCount -= 1;
                 [self.retweetButton setSelected:NO];
+                self.retweetCount.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
             }
         }];
     } else {
@@ -87,6 +93,7 @@
                 self.tweet.retweeted = YES;
                 self.tweet.retweetCount += 1;
                 [self.retweetButton setSelected:YES];
+                self.retweetCount.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
             }
         }];
     }
@@ -94,11 +101,11 @@
 
 #pragma mark - TweetCell Helper Functions
 
--(void)updateButtonImage {
+/*-(void)updateButtonImage {
     [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
     [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
     [self.likeButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
     [self.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
-}
+}*/
 
 @end

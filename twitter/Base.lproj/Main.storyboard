@@ -127,14 +127,30 @@
                                                         <action selector="didTapLike:" destination="5ke-P8-6xb" eventType="touchUpInside" id="FDb-X1-6uH"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1E-Jn-qnY">
+                                                    <rect key="frame" x="270" y="112" width="58" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="retweet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVx-zZ-CNW" userLabel="RetweetCount">
+                                                    <rect key="frame" x="197" y="112" width="58" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="atUsername" destination="Ki8-y0-Juz" id="HQj-ea-eLV"/>
                                             <outlet property="dateLabel" destination="Bph-AR-HLh" id="qi5-6p-JX4"/>
+                                            <outlet property="favoriteCount" destination="m1E-Jn-qnY" id="mKH-jI-TDO"/>
                                             <outlet property="likeButton" destination="WkA-sk-hKq" id="GKA-sQ-uwD"/>
                                             <outlet property="profileImage" destination="5MV-c4-EcX" id="J8w-dZ-ZaV"/>
                                             <outlet property="retweetButton" destination="lko-Bx-Rvj" id="Lim-qP-Jfr"/>
+                                            <outlet property="retweetCount" destination="OVx-zZ-CNW" id="sl0-pT-pdg"/>
                                             <outlet property="tweetMessage" destination="fHf-dd-ZOi" id="UuK-Sd-hCU"/>
                                             <outlet property="username" destination="lab-s8-W4C" id="A5d-oi-UpS"/>
                                         </connections>
