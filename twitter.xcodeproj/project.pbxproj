@@ -20,6 +20,7 @@
 		C039127A22CC0C9E003CF131 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C039127922CC0C9E003CF131 /* ComposeViewController.m */; };
 		C04FDE5C22CAD46B00D9D7BD /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C04FDE5B22CAD46B00D9D7BD /* TweetCell.m */; };
 		C069747922CC70DB007F4650 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C069747822CC70DB007F4650 /* Helper.m */; };
+		C092B0FB22CD58F200C792FA /* TweetDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C092B0FA22CD58F200C792FA /* TweetDetailsViewController.m */; };
 		C0AAB99A22CACA3F002A8535 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C0AAB99922CACA3F002A8535 /* User.m */; };
 		C0AAB99D22CACB70002A8535 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = C0AAB99C22CACB70002A8535 /* Tweet.m */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,8 @@
 		C04FDE5B22CAD46B00D9D7BD /* TweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		C069747722CC70DB007F4650 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		C069747822CC70DB007F4650 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		C092B0F922CD58F200C792FA /* TweetDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetDetailsViewController.h; sourceTree = "<group>"; };
+		C092B0FA22CD58F200C792FA /* TweetDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetDetailsViewController.m; sourceTree = "<group>"; };
 		C0AAB99822CACA3F002A8535 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		C0AAB99922CACA3F002A8535 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		C0AAB99B22CACB70002A8535 /* Tweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				6AD2790820BCC04D0085BC29 /* TimelineViewController.m */,
 				C039127822CC0C9E003CF131 /* ComposeViewController.h */,
 				C039127922CC0C9E003CF131 /* ComposeViewController.m */,
+				C092B0F922CD58F200C792FA /* TweetDetailsViewController.h */,
+				C092B0FA22CD58F200C792FA /* TweetDetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 				6AD278D120BC4B950085BC29 /* Sources */,
 				6AD278D220BC4B950085BC29 /* Frameworks */,
 				6AD278D320BC4B950085BC29 /* Resources */,
+				C8A2938376257B65D8B73D13 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,6 +258,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C8A2938376257B65D8B73D13 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -260,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C04FDE5C22CAD46B00D9D7BD /* TweetCell.m in Sources */,
+				C092B0FB22CD58F200C792FA /* TweetDetailsViewController.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
 				C0AAB99A22CACA3F002A8535 /* User.m in Sources */,
 				C039127A22CC0C9E003CF131 /* ComposeViewController.m in Sources */,

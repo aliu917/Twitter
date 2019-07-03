@@ -20,7 +20,10 @@
     // Initialization code
 }
 
-- (void) setTweet {
+- (void) setTweet: (Tweet *) tweet {
+    
+    
+    _tweet = tweet;
     self.username.text = self.tweet.user.name;
     self.tweetMessage.text = self.tweet.text;
     self.atUsername.text = self.tweet.user.screenName;

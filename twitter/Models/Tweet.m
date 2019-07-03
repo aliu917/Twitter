@@ -47,9 +47,41 @@
 }
 
 #pragma mark - Tweet Helper Functions
+
 -(NSString *) formatDate: (NSDictionary *) dictionary {
     NSString *createdAtOriginalString = dictionary[@"created_at"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [formatter setDateFormat:@"E MMM d HH:mm:ss Z y"];
+    NSDate *convertedDate = [formatter dateFromString:createdAtOriginalString];
+    //[df release];
+    NSDate *todayDate = [NSDate date];
+    double ti = [convertedDate timeIntervalSinceDate:todayDate];
+    ti = ti * -1;
+    if(ti < 1) {
+        return @"never";
+    } else  if (ti < 60) {
+        return @"less than a minute ago";
+    } else if (ti < 3600) {
+        int diff = round(ti / 60);
+        return [NSString stringWithFormat:@"%d min ago", diff];
+    } else if (ti < 86400) {
+        int diff = round(ti / 60 / 60);
+        return[NSString stringWithFormat:@"%d hours ago", diff];
+    } else if (ti < 2629743) {
+        //int diff = round(ti / 60 / 60 / 24);
+        //return[NSString stringWithFormat:@"%d days ago", diff];
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterNoStyle;
+        return [formatter stringFromDate:convertedDate];
+        //return self.createdAtString;
+    } else {
+        return @"never";
+    }
+    
+    
+    /*[formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+
     // Configure the input format to parse the date string
     formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
     // Convert String to Date
@@ -58,7 +90,34 @@
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterNoStyle;
     // Convert Date to String
-    return [formatter stringFromDate:date];
+    return [formatter stringFromDate:date];*/
 }
+
+/*-(NSString *)dateDiff:(NSString *)origDate {
+    [df setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [df setDateFormat:@"E MMM d HH:mm:ss Z y"];
+    NSDate *convertedDate = [df dateFromString:origDate];
+    //[df release];
+    NSDate *todayDate = [NSDate date];
+    double ti = [convertedDate timeIntervalSinceDate:todayDate];
+    ti = ti * -1;
+    if(ti < 1) {
+        return @"never";
+    } else  if (ti < 60) {
+        return @"less than a minute ago";
+    } else if (ti < 3600) {
+        int diff = round(ti / 60);
+        return [NSString stringWithFormat:@"%d minutes ago", diff];
+    } else if (ti < 86400) {
+        int diff = round(ti / 60 / 60);
+        return[NSString stringWithFormat:@"%d hours ago", diff];
+    } else if (ti < 2629743) {
+        //int diff = round(ti / 60 / 60 / 24);
+        //return[NSString stringWithFormat:@"%d days ago", diff];
+        return self.createdAtString;
+    } else {
+        return @"never";
+    }
+}*/
 
 @end

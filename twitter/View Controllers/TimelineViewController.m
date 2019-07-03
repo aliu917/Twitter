@@ -15,6 +15,7 @@
 #import "Helper.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "TweetDetailsViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -48,10 +49,8 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
-    
-    cell.tweet = self.tweets[indexPath.row];
-    
-    [cell setTweet];
+        
+    [cell setTweet: self.tweets[indexPath.row]];
     
     /*
     cell.username.text = tweet.user.name;
@@ -120,9 +119,17 @@
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     UINavigationController *navigationController = [segue destinationViewController];
-     ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-     composeController.delegate = self;
+     /*if ([segue.identifier isEqualToString:@"TweetDetailsViewController"]) {
+         UITableViewCell *tappedCell = sender;
+         NSIndexPath *indexPath = [self.tableView indexPathForCell: tappedCell];
+         Tweet *tweet = self.tweets[indexPath.row];
+         TweetDetailsViewController *tweetDetailsViewController = [segue destinationViewController];
+         tweetDetailsViewController.tweet = tweet;
+     } else {*/
+         UINavigationController *navigationController = [segue destinationViewController];
+         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+         composeController.delegate = self;
+     //}
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
  }
