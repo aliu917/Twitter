@@ -119,17 +119,18 @@
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     /*if ([segue.identifier isEqualToString:@"TweetDetailsViewController"]) {
-         UITableViewCell *tappedCell = sender;
-         NSIndexPath *indexPath = [self.tableView indexPathForCell: tappedCell];
-         Tweet *tweet = self.tweets[indexPath.row];
+     if ([segue.identifier isEqualToString:@"detailSegue"]) {
+         TweetCell *tappedCell = sender;
+         //NSIndexPath *indexPath = [self.tableView indexPathForCell: tappedCell];
+         //Tweet *tweet = self.tweets[indexPath.row];
          TweetDetailsViewController *tweetDetailsViewController = [segue destinationViewController];
-         tweetDetailsViewController.tweet = tweet;
-     } else {*/
+         //tweetDetailsViewController.tweet = tweet;
+         tweetDetailsViewController.tweet = tappedCell.tweet;
+     } else {
          UINavigationController *navigationController = [segue destinationViewController];
          ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
          composeController.delegate = self;
-     //}
+     }
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
  }
