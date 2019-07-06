@@ -56,8 +56,8 @@ Here's a walkthrough of implemented user stories:
 Infinite scroll:
 <img src='http://recordit.co/tbJ4i3fSyL.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-Composing tweet:
-<img src='http://recordit.co/tbJ4i3fSyL.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+Composing tweet (first time is if user hits cancel and second time is actually tweeting):
+<img src='http://recordit.co/JUMMc2uzTx.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 Liking/retweeting:
 <img src='http://recordit.co/Dy1xZhdres.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
