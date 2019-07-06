@@ -73,6 +73,8 @@ Replying to tweet:
 
 Tab Bar navigation:
 <img src='http://recordit.co/mAmyBokD7D.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://recordit.co/SgRqCOUH8i.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+^I swear the mentions page works--I just don't have a twitter so nobody mentions me! So here is proof that I now have two mentions!
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
