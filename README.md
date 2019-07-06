@@ -62,8 +62,8 @@ Composing tweet (first time is if user hits cancel and second time is actually t
 Liking/retweeting:
 <img src='http://recordit.co/Dy1xZhdres.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-Viewing profile page (will update with timeline view once my API key starts working...):
-<img src='http://recordit.co/FWbHYfWccv.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+Viewing profile page:
+<img src='http://recordit.co/JMsyZ4yUfG.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 Auto layout:
 <img src='http://recordit.co/eQEJFusqCh.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
@@ -71,9 +71,9 @@ Auto layout:
 Replying to tweet:
 <img src='http://recordit.co/ylliWc4gps.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-Will post later when API key works:
--profile table view of timeline
--tab bar navigation
+Tab Bar navigation:
+<img src='http://recordit.co/mAmyBokD7D.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
