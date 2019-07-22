@@ -11,6 +11,7 @@
 #import "Helper.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
+#import "ComposeViewController.h"
 
 @interface TweetDetailsViewController ()
 
@@ -23,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *favoriteCount;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-//@property (strong, nonatomic) Tweet *tweet;
 
 @end
 
@@ -40,6 +40,7 @@
     [self.profileImage setImageWithURL:imageURL];
     self.favoriteCount.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
     self.retweetCount.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
+    [Helper initializeRetweet:self.retweetButton andLike:self.likeButton forTweet:self.tweet];
 }
 - (IBAction)retweetButton:(id)sender {
     if (self.tweet.retweeted) {
@@ -69,7 +70,7 @@
             }
         }];
     }
-    [self updateButtons];
+    [Helper initializeRetweet:self.retweetButton andLike:self.likeButton forTweet:self.tweet];
 }
 - (IBAction)likeButton:(id)sender {
     if (self.tweet.favorited) {
@@ -99,24 +100,19 @@
             }
         }];
     }
-    [self updateButtons];
+    [Helper initializeRetweet:self.retweetButton andLike:self.likeButton forTweet:self.tweet];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    UINavigationController *navigationController = [segue destinationViewController];
+    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+    composeController.replyTweet = self.tweet;
+    composeController.delegate = self.timeline;
 }
-*/
 
-- (void) updateButtons {
-    [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
-    [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
-    [self.likeButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
-    [self.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
-}
 
 @end

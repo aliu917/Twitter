@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "Tweet.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Helper : NSObject
 
 +(NSURL *) makeURLWithString: (NSString *) pictureStringURL;
++ (void) initializeRetweet:(UIButton *)retweet andLike:(UIButton *)like forTweet:(Tweet *)tweet;
 
 @end
 

@@ -18,7 +18,10 @@
         self.name = dictionary[@"name"];
         self.screenName = [self makeScreenName:dictionary];
         self.profileImage = dictionary[@"profile_image_url_https"];
-        //initialize any other properties
+        self.bio = dictionary[@"description"];
+        self.backgroundImage = dictionary[@"profile_banner_url"];
+        self.rawScreenName = dictionary[@"screen_name"];
+        self.userID = dictionary[@"id_str"];
     }
     return self;
 }

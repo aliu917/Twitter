@@ -13,6 +13,7 @@
 @interface ComposeViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *composedTweet;
+@property (weak, nonatomic) IBOutlet UILabel *replyLabel;
 
 @end
 
@@ -22,7 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    if (self.replyTweet) {
+        self.replyLabel.text = [NSString stringWithFormat:@"Replying to %@", self.replyTweet.user.screenName];
+    } else {
+        self.replyLabel.alpha = 0;
+    }
 }
 
 #pragma mark - Action: close new tweet screen
@@ -45,7 +50,14 @@
 }*/
 
 - (IBAction)didTapTweet:(id)sender {
-    [[APIManager shared]postStatusWithText:self.composedTweet.text completion:^(Tweet *tweet, NSError *error) {
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    if (self.replyTweet) {
+        [param setObject:self.replyTweet.idStr forKey:@"in_reply_to_status_id"];
+        NSString *addSpace = [self.replyTweet.user.screenName stringByAppendingString:@" "];
+        self.composedTweet.text = [addSpace stringByAppendingString:self.composedTweet.text];
+    }
+    [param setObject:self.composedTweet.text forKey:@"status"];
+    [[APIManager shared]postStatusWithParam:param completion:^(Tweet *tweet, NSError *error) {
         if(error){
             NSLog(@"Error composing Tweet: %@", error.localizedDescription);
         }

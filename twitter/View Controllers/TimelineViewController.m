@@ -16,8 +16,9 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "TweetDetailsViewController.h"
+#import "ProfileViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tweets;
@@ -45,32 +46,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Data Source
+#pragma mark - UITableView delegate & Data Source
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
-        
     [cell setTweet: self.tweets[indexPath.row]];
-    
-    /*
-    cell.username.text = tweet.user.name;
-    cell.tweetMessage.text = tweet.text;
-    cell.atUsername.text = tweet.user.screenName;
-    cell.dateLabel.text = tweet.createdAtString;
-    NSURL *imageURL = [Helper makeURLWithString: tweet.user.profileImage];
-    [cell.profileImage setImageWithURL:imageURL];*/
-    
-    
-    //maybe like a refresh button method in the helper later???
-    
-    
-    [cell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
-    [cell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
-    [cell.likeButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
-    [cell.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
-    
-    //^^^for this ugly chunk right here...
-    
+    cell.delegate = self;
     return cell;
 }
 
@@ -94,6 +75,13 @@
     appDelegate.window.rootViewController = loginViewController;
     [[APIManager shared] logout];
 }
+
+#pragma mark - TweetCell delegate
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
 
 #pragma mark - TimelineViewController helper functions
 
@@ -121,11 +109,12 @@
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
      if ([segue.identifier isEqualToString:@"detailSegue"]) {
          TweetCell *tappedCell = sender;
-         //NSIndexPath *indexPath = [self.tableView indexPathForCell: tappedCell];
-         //Tweet *tweet = self.tweets[indexPath.row];
          TweetDetailsViewController *tweetDetailsViewController = [segue destinationViewController];
-         //tweetDetailsViewController.tweet = tweet;
+         tweetDetailsViewController.timeline = self;
          tweetDetailsViewController.tweet = tappedCell.tweet;
+     } else if ([segue.identifier isEqualToString:@"profileSegue"]) {
+         ProfileViewController *profileController = [segue destinationViewController];
+         profileController.user = sender;
      } else {
          UINavigationController *navigationController = [segue destinationViewController];
          ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;

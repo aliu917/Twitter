@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TweetDetailsViewController : UIViewController
 
 @property (strong, nonatomic) Tweet *tweet;
+@property (strong, nonatomic) UIViewController *timeline;
 
 @end
 

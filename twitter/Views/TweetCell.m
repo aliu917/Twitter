@@ -10,6 +10,7 @@
 #import "APIManager.h"
 #import "Helper.h"
 #import "UIImageView+AFNetworking.h"
+#import "Tweet.h"
 
 @implementation TweetCell
 
@@ -17,12 +18,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImage addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profileImage setUserInteractionEnabled:YES];
 }
 
-- (void) setTweet: (Tweet *) tweet {
-    
-    
+- (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
     self.username.text = self.tweet.user.name;
     self.tweetMessage.text = self.tweet.text;
@@ -32,7 +33,7 @@
     [self.profileImage setImageWithURL:imageURL];
     self.favoriteCount.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
     self.retweetCount.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
-
+    [Helper initializeRetweet:self.retweetButton andLike:self.likeButton forTweet:tweet];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -102,13 +103,19 @@
     }
 }
 
+#pragma mark - Action: tapped user profile image
+
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate tweetCell:self didTap:self.tweet.user];
+}
+
 #pragma mark - TweetCell Helper Functions
 
-/*-(void)updateButtonImage {
-    [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
-    [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
-    [self.likeButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
-    [self.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
-}*/
+//-(void)updateButtonImage {
+//    [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+//    [self.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
+//    [self.likeButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+//    [self.likeButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
+//}
 
 @end
